@@ -110,7 +110,7 @@ class HomePage extends StatelessWidget {
                     height: double.infinity,
                     alignment: Alignment.center,
                     child: Text("学生圈页，浏览"),
-                    // child: InboxTab(),
+                    // child: ContactsList(),
                   ),
                   Container(
                     color: Colors.white,
@@ -139,8 +139,8 @@ class HomePage extends StatelessWidget {
                 child: HomePageTabView(
                   tabIcons: [
                     "assets/icons/home.svg",
-                    "assets/illustrations/addressbook.svg",
                     "assets/icons/circle.svg",
+                    "assets/icons/world.svg",
                     "assets/icons/people.svg",
                   ],
                   activeColor: commonBlueColor,
@@ -176,14 +176,14 @@ class HomePage extends StatelessWidget {
         crossAxisSpacing: 5,
         crossAxisCount: 4,
         children: [
-          _buildGridItem('assets/row/add.png', '信息添加', cid: 73),
-          _buildGridItem('assets/row/select.png', '信息查询', cid: 510),
-          _buildGridItem('assets/row/update.png', '信息修改', cid: 78),
-          _buildGridItem('assets/row/delete.png', '信息删除', cid: 269),
-          _buildGridItem('assets/row/bulletinboard.png', '告示栏信息', cid: 12),
-          _buildGridItem('assets/row/contacts.png', '联系人', cid: 13),
-          _buildGridItem('assets/row/3.png', '信息修改', cid: 78),
-          _buildGridItem('assets/row/4.png', '信息删除', cid: 269),
+          _buildGridItem('assets/row/add.png', '信息添加', cid: 1),
+          _buildGridItem('assets/row/select.png', '信息查询', cid: 2),
+          _buildGridItem('assets/row/update.png', '信息修改', cid: 3),
+          _buildGridItem('assets/row/delete.png', '信息删除', cid: 4),
+          _buildGridItem('assets/row/bulletinboard.png', '告示栏信息', cid: 5),
+          _buildGridItem('assets/row/contacts.png', '联系人', cid: 6),
+          _buildGridItem('assets/row/picture.png', '摄像乐园', cid: 7),
+          _buildGridItem('assets/row/login.png', '登录', cid: 8),
         ],
       )),
     );
@@ -194,34 +194,44 @@ class HomePage extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         switch (cid) {
-          case 73:
+          case 1:
             {
               Get.toNamed(Routes.STUDENTADD);
             }
             break;
-          case 510:
+          case 2:
             {
               Get.toNamed(Routes.STUDENTSELECT);
             }
             break;
-          case 78:
+          case 3:
             {
               Get.toNamed(Routes.STUDENTUPDATE);
             }
             break;
-          case 269:
+          case 4:
             {
               Get.toNamed(Routes.STUDENTDELETE);
             }
             break;
-          case 12:
+          case 5:
             {
               Get.toNamed(Routes.TARGET);
             }
             break;
-          case 13:
+          case 6:
             {
               Get.toNamed(Routes.CONTACTS);
+            }
+            break;
+          case 7:
+            {
+              Get.toNamed(Routes.PICTURE);
+            }
+            break;
+          case 8:
+            {
+              Get.toNamed(Routes.LOGIN);
             }
             break;
         }

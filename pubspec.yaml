@@ -42,6 +42,7 @@ dependencies:
   cookie_jar: 3.0.1
   path_provider: ^2.0.1
   provider: ^5.0.0
+  fluttertoast: ^8.0.2
 
 
 dev_dependencies:
@@ -61,13 +62,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/illustrations/timg.jpeg
-     - assets/illustrations/phone.svg
-     - assets/illustrations/addressbook.svg
-     - assets/icons/home.svg
-     - assets/icons/menu.svg
-     - assets/icons/circle.svg
-     - assets/icons/people.svg
+     - assets/illustrations/
+     - assets/icons/
      - assets/navigator/back.svg
      - assets/navigator/close.svg
      - assets/banner/goodpeople.png

@@ -11,14 +11,19 @@ final Color commonBlueColor = Colors.blue;
 
 final List splashIllustrations = [
   Illustration(
-      asset: 'assets/illustrations/addressbook.svg',
-      copyright: 'BSGStudio in all-free-download.com'
+      asset: 'assets/illustrations/splash1.svg',
+      copyright: '天行健，君子以自强不息'
   ),
   Illustration(
-      asset: 'assets/illustrations/addressbook.svg',
-      copyright: 'BSGStudio in all-free-download.com'
+      asset: 'assets/illustrations/splash2.svg',
+      copyright: '地势坤，君子以厚德载物'
   ),
 ];
+
+
+class Global{
+  static int userLoginContent = 0;
+}
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 

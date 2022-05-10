@@ -22,7 +22,7 @@ class TDatabaseHelper {
   Future<void> initDB() async {
     String path = await getDatabasesPath();
     db = await openDatabase(
-      join(path, 'demo.db'),
+      join(path, 'teacher.db'),
       onCreate: (database, version) async {
         await database.execute(
           """
@@ -40,12 +40,12 @@ class TDatabaseHelper {
     );
   }
 
-  Future<int> inserTeacher(Teacher teacher) async {
+  Future<int> insertTeacher(Teacher teacher) async {
     int result = await db.insert('teachers', teacher.toMap());
     return result;
   }
 
-  Future<int> updatTeacher(Teacher teacher) async {
+  Future<int> updateTeacher(Teacher teacher) async {
     int result = await db.update(
       'teachers',
       teacher.toMap(),
@@ -69,7 +69,7 @@ class TDatabaseHelper {
     return queryResult.map((e) => Teacher.fromMap(e)).toList();
   }
 
-  Future<List<Teacher>> TeacherLoginaFlag(String tid) async {
+  Future<List<Teacher>> TeacherLogintFlag(String tid) async {
     final List<Map<String, Object?>>queryResult = await db.query(
       'teachers',
       where: "teacherid = ?",

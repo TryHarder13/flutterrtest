@@ -2,6 +2,8 @@ import 'package:flutterrtest/pages/home/home_binding.dart';
 import 'package:flutterrtest/pages/home/home_page.dart';
 import 'package:flutterrtest/pages/login/login_page.dart';
 import 'package:flutterrtest/pages/mine/about.dart';
+import 'package:flutterrtest/pages/other/picture/picture_data.dart';
+import 'package:flutterrtest/pages/other/picture/picture_page.dart';
 import 'package:flutterrtest/pages/splash/splash_binding.dart';
 import 'package:flutterrtest/pages/splash/splash_page.dart';
 import 'package:flutterrtest/pages/student_add/student_add_binding.dart';
@@ -10,8 +12,9 @@ import 'package:flutterrtest/pages/student_delete/student_delete_binding.dart';
 import 'package:flutterrtest/pages/student_delete/student_delete_page.dart';
 import 'package:flutterrtest/pages/student_select/student_select_binding.dart';
 import 'package:flutterrtest/pages/student_select/student_select_page.dart';
+import 'package:flutterrtest/pages/student_update/edit/student_update_edit_binding.dart';
 import 'package:flutterrtest/pages/student_update/student_update_binding.dart';
-import 'package:flutterrtest/pages/student_update/student_update_edit_page.dart';
+import 'package:flutterrtest/pages/student_update/edit/student_update_edit_page.dart';
 import 'package:flutterrtest/pages/student_update/student_update_page.dart';
 import 'package:flutterrtest/pages/target/target_binding.dart';
 import 'package:flutterrtest/pages/target/target_page.dart';
@@ -39,7 +42,7 @@ abstract class AppPages {
 
     //学生信息修改页
     GetPage(name: Routes.STUDENTUPDATE, page: () => StudentUpdatePage(), binding: StudentUpdateBinding(),
-      children:[GetPage(name: Routes.STUDENTUPDATEEDIT, page: () => StudentUpdateEditPage(), binding: StudentUpdateBinding()),]
+      children:[GetPage(name: Routes.STUDENTUPDATEEDIT, page: () => StudentUpdateEditPage(), binding: StudentUpdateeditBinding()),]
     ),
 
     // //学生信息修改页
@@ -59,6 +62,9 @@ abstract class AppPages {
 
     //登录页
     GetPage(name: Routes.LOGIN, page: () => LoginPage(),),
+
+    //图片页
+    GetPage(name: Routes.PICTURE, page: () => PetCard(data: petCardData),),
   ];
 }
 
@@ -100,6 +106,9 @@ abstract class Routes {
   //关于页面
   static const ABOUT = "/about";
 
-  //关于页面
+  //登录页面
   static const LOGIN = "/login";
+
+  //摄影图片页面
+  static const PICTURE = "/picture";
 }

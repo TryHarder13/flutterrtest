@@ -23,7 +23,7 @@ class SDatabaseHelper {
   Future<void> initDB() async {
     String path = await getDatabasesPath();
     db = await openDatabase(
-      join(path, 'demo.db'),
+      join(path, 'student.db'),
       onCreate: (database, version) async {
         await database.execute(
           """
@@ -63,6 +63,24 @@ class SDatabaseHelper {
 
   Future<List<Student>> retrieveStudents() async {
     final List<Map<String, Object?>> queryResult = await db.query('students');
+    return queryResult.map((e) => Student.fromMap(e)).toList();
+  }
+
+  Future<List<Student>> queryStudentsname(String s) async {
+    final List<Map<String, Object?>> queryResult = await db.query(
+      'students',
+      where:"sname = ?" ,
+      whereArgs: [s],
+    );
+    return queryResult.map((e) => Student.fromMap(e)).toList();
+  }
+
+  Future<List<Student>> StudentLoginsFlag(String sid) async {
+    final List<Map<String, Object?>>queryResult = await db.query(
+      'students',
+      where: "studentid = ?",
+      whereArgs: [sid],
+    );
     return queryResult.map((e) => Student.fromMap(e)).toList();
   }
 

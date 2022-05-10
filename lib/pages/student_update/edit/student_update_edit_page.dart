@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterrtest/common/config.dart';
 import 'package:flutterrtest/common/widgets/navigator_bar.dart';
 import 'package:flutterrtest/common/widgets/studentmessagetoast.dart';
 import 'package:flutterrtest/core/database/studentdb.dart';
 import 'package:flutterrtest/models/student.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutterrtest/pages/student_update/student_update_controller.dart';
 import 'package:get/get.dart';
 
-class StudentAddPage extends StatefulWidget {
+class StudentUpdateEditPage extends StatefulWidget {
   @override
-  _StudentAddPageState createState() => _StudentAddPageState();
+  _StudentUpdateEditPageState createState() => _StudentUpdateEditPageState();
 }
 
-class _StudentAddPageState extends State<StudentAddPage> {
+class _StudentUpdateEditPageState extends State<StudentUpdateEditPage> {
+  final StudentUpdateEditPagecontroller = Get.find<StudentUpdateController>();
+
   late SDatabaseHelper sdbHelper;
   final studentidController = TextEditingController();
   final snameController = TextEditingController();
@@ -26,23 +27,27 @@ class _StudentAddPageState extends State<StudentAddPage> {
   final spasswordController = TextEditingController();
 
   bool isEditing = false;
-  late Student _student;
+  late Student studentedit = Get.arguments;
 
   @override
   void initState() {
     super.initState();
     this.sdbHelper = SDatabaseHelper();
     this.sdbHelper.initDB().whenComplete(() async {
-      setState(() {});
+      setState(() {
+        print("------${studentedit.sname}");
+        populateFields(studentedit);
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       resizeToAvoidBottomInset: false, //设置这个属性防止键盘覆盖内容或者键盘撑起内容
       appBar: NavigatorBar(
-        title: "学生信息添加",
+        title: "学生信息修改编辑",
         closeCallBack: () {
           print("返回到首页");
           Get.back();
@@ -119,7 +124,7 @@ class _StudentAddPageState extends State<StudentAddPage> {
                               margin: new EdgeInsets.symmetric(vertical: 10),
                               child: new ElevatedButton(
                                 child: const Text('提交'),
-                                onPressed: addStudentMessage,
+                                onPressed: EditStudent,
                               ),
                             ),
                           ],
@@ -136,7 +141,7 @@ class _StudentAddPageState extends State<StudentAddPage> {
     );
   }
 
-  Future<void> addStudentMessage() async {
+  Future<void> EditStudent() async {
     String studentid = studentidController.text;
     String sname = snameController.text;
     String ssex = ssexController.text;
@@ -147,66 +152,49 @@ class _StudentAddPageState extends State<StudentAddPage> {
     String sphone = sphoneController.text;
     String spassword = spasswordController.text;
 
-    Student student = new Student(
-      studentid: studentid,
-      sname: sname,
-      ssex: ssex,
-      sage: int.parse(sage),
-      sfaculty: sfaculty,
-      smajor: smajor,
-      sclass: int.parse(sclass),
-      sphone: sphone,
-      spassword: spassword,
-    );
-    await addStudent(student);
-    resetData();
-  }
+    studentedit.studentid = studentid;
+    studentedit.sname = sname;
+    studentedit.ssex = ssex;
+    studentedit.sage = int.parse(sage);
+    studentedit.sfaculty = sfaculty;
+    studentedit.smajor = smajor;
+    studentedit.sclass = int.parse(sclass);
+    studentedit.sphone = sphone;
+    studentedit.spassword = spassword;
+    await updateStudent(studentedit);
+    showupdatemessagesuccess();
 
-  Future<int> addStudent(Student student) async {
-    if(Global.userLoginContent == 3){
-      showaddwarn();
-      return Global.userLoginContent;
-    }
-    showaddmessagesuccess();
-    return await this.sdbHelper.insertStudent(student);
+    // Get.put(StudentUpdateController());
+    Get.back();
+    Get.back();
+    // Get.toNamed(Routes.STUDENTUPDATE);
   }
 
   Future<int> updateStudent(Student student) async {
     return await this.sdbHelper.updateStudent(student);
   }
 
-  void resetData() {
-    studentidController.clear();
-    snameController.clear();
-    ssexController.clear();
-    sageController.clear();
-    sfacultyController.clear();
-    smajorController.clear();
-    sclassController.clear();
-    sphoneController.clear();
-    spasswordController.clear();
-    isEditing = false;
+  void populateFields(Student student) {
+    studentedit = student;
+    studentidController.text = studentedit.studentid;
+    snameController.text = studentedit.sname;
+    ssexController.text = studentedit.ssex;
+    sageController.text = studentedit.sage.toString();
+    sfacultyController.text = studentedit.sfaculty;
+    smajorController.text = studentedit.smajor;
+    sclassController.text = studentedit.sclass.toString();
+    sphoneController.text = studentedit.sphone;
+    spasswordController.text = studentedit.spassword;
+    isEditing = true;
   }
 
-  // showaddmessagesuccess() {
+  // showupdatemessagesuccess() {
   //   Fluttertoast.showToast(
-  //     msg: "添加成功",
+  //     msg: "修改成功",
   //     toastLength: Toast.LENGTH_SHORT,
   //     gravity: ToastGravity.CENTER,
   //     timeInSecForIosWeb: 1,
   //     backgroundColor: Colors.green,
-  //     textColor: Colors.white,
-  //     fontSize: 16.0,
-  //   );
-  // }
-  //
-  // showwarn() {
-  //   Fluttertoast.showToast(
-  //     msg: "您无权添加学生信息，请找管理员",
-  //     toastLength: Toast.LENGTH_SHORT,
-  //     gravity: ToastGravity.CENTER,
-  //     timeInSecForIosWeb: 1,
-  //     backgroundColor: Colors.red,
   //     textColor: Colors.white,
   //     fontSize: 16.0,
   //   );

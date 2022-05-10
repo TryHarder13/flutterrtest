@@ -1,22 +1,22 @@
 class Administrator {
   int? id;
-  String adimnistratorid; //管理员编号
+  String administratorid; //管理员编号
   String aname; //姓名
   String apassword; //密码
 
   Administrator(
-      {required this.adimnistratorid,
+      {required this.administratorid,
       required this.aname,
       required this.apassword});
 
   Administrator.fromMap(Map<String, dynamic> res)
-      : adimnistratorid = res["adimnistratorid"],
+      : administratorid = res["administratorid"],
         aname = res["aname"],
         apassword = res["apassword"];
 
   Map<String, Object?> toMap() {
     return {
-      'adimnistratorid': adimnistratorid,
+      'administratorid': administratorid,
       'aname': aname,
       'apassword': apassword
     };

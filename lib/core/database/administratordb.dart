@@ -39,12 +39,12 @@ class ADatabaseHelper {
     );
   }
 
-  Future<int> insertAdminstrator(Administrator administrator) async {
+  Future<int> insertAdministrator(Administrator administrator) async {
     int result = await db.insert('administrators', administrator.toMap());
     return result;
   }
 
-  Future<int> updateAdminstrator(Administrator administrator) async {
+  Future<int> updateAdministrator(Administrator administrator) async {
     int result = await db.update(
       'administrators',
       administrator.toMap(),
